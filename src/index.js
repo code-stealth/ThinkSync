@@ -1,10 +1,7 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 
-
-const connectDatabase = require("./dbconnect");
-
-connectDatabase();
 //importing the routes
 const userRouter = require("./routes/userRoutes");
 const noteRouter = require("./routes/noteRoutes");
@@ -17,6 +14,17 @@ app.get("/", (req, res)=>{
     res.send("Hello");
 });
 
-app.listen(5000, ()=>{
-    console.log("Server started on port no. 5000");
-});
+// Connecting the MongoDB to the Application. 
+mongoose.connect("mongodb+srv://ChiragAgarwal:Chirag%40cr7@chiragdatabase.p7marin.mongodb.net/?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(()=>{
+    console.log("MongoDB connected Successfully!");
+    app.listen(5000, ()=>{
+        console.log("Server started on port no. 5000");
+    });
+}).catch(()=>{
+    console.log("error");
+})
+
+
