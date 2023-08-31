@@ -1,10 +1,15 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
 const mongoose = require("mongoose");
+
 
 //importing the routes
 const userRouter = require("./routes/userRoutes");
 const noteRouter = require("./routes/noteRoutes");
+
+// converts the request body to json
+
 
 // using the routes 
 app.use("/users", userRouter);
